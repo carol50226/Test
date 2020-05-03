@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
+from scipy import interpolate
 file_name='c2pg1520.19i'
 
 def PLOT_3D_TEC(Data,time_index):
@@ -31,7 +32,21 @@ def PLOT_3D_TEC(Data,time_index):
     plt.xlabel("lat") 
     plt.ylabel("lon")
     plt.show()    
+
+    f = interpolate.interp2d(X, Y, Z, kind='linear')
+    xnew = np.arange(-87.5,87.5+1, 0.5)
+    ynew = np.arange(-180, 180+1, 1)
     
+    znew = f(xnew, ynew)
+    xnew, ynew = np.meshgrid(xnew, ynew)
+    
+    fig = plt.figure()
+    bx = Axes3D(fig)
+    bx.plot_surface(xnew, ynew, znew, rstride=1, cstride=1, cmap=plt.get_cmap('rainbow'))    
+    #plt.plot(xnew, Z[0, :], 'ro-', xnew, znew[0, :], 'b-')
+    plt.show()
+
+   
     
 def PLOT_TEC(data,len_x,date_plot,lon_plot,lat_plot):
     t=range(0,len_x,1)
@@ -177,3 +192,18 @@ if __name__ == '__main__':
         
     PLOT_3D_TEC(Data,time_index)
     
+    
+    '''
+    x = np.arange(-5.01, 5.01, 0.25)
+    y = np.arange(-5.01, 5.01, 0.25)
+    xx, yy = np.meshgrid(x, y)
+    z = np.sin(xx**2+yy**2)
+    f = interpolate.interp2d(x, y, z, kind='cubic')
+    
+    
+    xnew = np.arange(-5.01, 5.01, 1e-2)
+    ynew = np.arange(-5.01, 5.01, 1e-2)
+    znew = f(xnew, ynew)
+    plt.plot(x, z[0, :], 'ro-', xnew, znew[0, :], 'b-')
+    plt.show()
+    '''

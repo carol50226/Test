@@ -72,9 +72,9 @@ if __name__=='__main__':
             record = pynmea2.parse(line)
             Write_RTKlibFormat(RTKlog_name,line)
             
-            aa='{:02d}°{:02d}′{:07.4f}″'.format(int(record.latitude), int(record.latitude_minutes), record.latitude_seconds)
-            int(record.latitude) int(record.latitude_minutes) record.latitude_seconds
-            tset_z=parse_dms()  
+            #aa='{:02d}°{:02d}′{:07.4f}″'.format(int(record.latitude), int(record.latitude_minutes), record.latitude_seconds)
+            #int(record.latitude) int(record.latitude_minutes) record.latitude_seconds
+            #tset_z=parse_dms()  
             
             
             
